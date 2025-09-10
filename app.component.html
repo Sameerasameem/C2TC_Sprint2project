@@ -1,0 +1,168 @@
+<div class="bg-container">
+<div class="">
+  
+  <div style="height:100vh;">
+    <div class="">
+      <div class="shadow w-20 p-5 position-absolute top-50 start-50 translate-middle">
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <h4 class="display-6 text-center py-2">User Database</h4>
+
+          <!-- Name -->
+          <div class="">
+            <label for="sname">Name</label>
+            <input id="sname" required #sname="ngModel" ngModel name="sname" type="text"
+              class="form-control" placeholder="Enter your name">
+            <div *ngIf="sname.invalid && sname.touched">
+              <small class="text-danger" *ngIf="sname.errors?.['required']">Required</small>
+            </div>
+          </div><br>
+
+          <!-- Email -->
+          <div class="">
+            <label for="email">Email</label>
+            <input id="email" required #email="ngModel" ngModel name="email" type="email"
+              class="form-control" placeholder="Enter your email">
+            <div *ngIf="email.invalid && email.touched">
+              <small class="text-danger" *ngIf="email.errors?.['required']">Required</small>
+            </div>
+          </div><br>
+
+          <!-- Reg No -->
+          <div class="">
+            <label for="regno">Reg No</label>
+            <input id="regno" required #regno="ngModel" ngModel name="regno" type="number"
+              class="form-control" placeholder="Enter your Reg No">
+            <div *ngIf="regno.invalid && regno.touched">
+              <small class="text-danger" *ngIf="regno.errors?.['required']">Required</small>
+            </div>
+          </div><br>
+
+          <!-- Department -->
+          <div class="">
+            <label for="dep">Department</label>
+            <input id="dep" required #dep="ngModel" ngModel name="dep" type="text"
+              class="form-control" placeholder="Enter your Department">
+            <div *ngIf="dep.invalid && dep.touched">
+              <small class="text-danger" *ngIf="dep.errors?.['required']">Required</small>
+            </div>
+          </div><br>
+
+          <!-- CGPA -->
+          <div class="">
+            <label for="cgpa">CGPA</label>
+            <input id="cgpa" required #cgpa="ngModel" ngModel name="cgpa" type="number" step="0.01"
+              class="form-control" placeholder="Enter your CGPA">
+            <div *ngIf="cgpa.invalid && cgpa.touched">
+              <small class="text-danger" *ngIf="cgpa.errors?.['required']">Required</small>
+            </div>
+          </div><br>
+
+           
+
+          <!-- Submit Button -->
+          <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div><br>
+  </div>
+
+  <!-- Table for displaying users -->
+  <div class="mt-5">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Reg No</th>
+          <th>Dept</th>
+          <th>CGPA</th>
+          
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userDetails">
+          <td>{{user.id}}</td>
+          <td>{{user.sname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.regno}}</td>
+          <td>{{user.dep}}</td>
+          <td>{{user.cgpa}}</td>
+          
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" (click)="edit(user)">Edit</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal for Update -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update User</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #updateForm="ngForm" (ngSubmit)="updateUser()">
+            <h4 class="display-6 text-center py-2">Update User</h4>
+
+            <!-- Name -->
+            <div class="">
+              <label for="sname">Name</label>
+              <input id="sname" required [(ngModel)]="userToUpdate.sname" name="sname" type="text"
+                class="form-control" placeholder="Enter name">
+            </div><br>
+
+            <!-- Email -->
+            <div class="">
+              <label for="email">Email</label>
+              <input id="email" required [(ngModel)]="userToUpdate.email" name="email" type="email"
+                class="form-control" placeholder="Enter email">
+            </div><br>
+
+            <!-- Reg No -->
+            <div class="">
+              <label for="regno">Reg No</label>
+              <input id="regno" required [(ngModel)]="userToUpdate.regno" name="regno" type="number"
+                class="form-control" placeholder="Enter Reg No">
+            </div><br>
+
+            <!-- Department -->
+            <div class="">
+              <label for="dep">Department</label>
+              <input id="dep" required [(ngModel)]="userToUpdate.dep" name="dep" type="text"
+                class="form-control" placeholder="Enter Department">
+            </div><br>
+
+            <!-- CGPA -->
+            <div class="">
+              <label for="cgpa">CGPA</label>
+              <input id="cgpa" required [(ngModel)]="userToUpdate.cgpa" name="cgpa" type="number"
+                class="form-control" step="0.01" placeholder="Enter CGPA">
+            </div><br>
+
+            
+
+            <div class="form-group text-center">
+              <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
